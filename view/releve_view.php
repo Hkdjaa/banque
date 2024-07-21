@@ -13,7 +13,7 @@
         <div class="search-account">
             <h2>Rechercher un Compte Bancaire</h2>
             <form id="search-form">
-                <label for="search">Renseigner le numéro de compte ou le nom</label>
+                <label for="search">Renseigner le prenom ou le nom du client</label>
                 <input type="text" id="search" name="search" required>
                 <br>
                 <button type="submit" id="search_submit">Rechercher</button>
@@ -26,9 +26,13 @@
         <img src="../public/images/pic07.jpg" alt="" />
     </span>
 </section>
+</div>
+    </div>
 
-<!-- Sidebar -->
-<?php include '../public/includes/sidebar.php'; ?>
+    <!-- Sidebar -->
+    <?php include '../public/includes/sidebar.php'; ?>
+
+</div>
 
 <!-- Scripts -->
 <?php include '../public/includes/scripts-communs.php'; ?>

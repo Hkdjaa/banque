@@ -5,8 +5,8 @@ require_once '../model/client.php';
 class ClientController {
     private $clientManager;
 
-    public function __construct($db) {
-        $this->clientManager = new Client($db);
+    public function __construct($connect) {
+        $this->clientManager = new Client($connect);
     }
 
     public function searchClients($search) {
@@ -22,13 +22,13 @@ class ClientController {
 
 // Connexion à la base de données
 try {
-    $db = new PDO('mysql:host=mysql-hadja.alwaysdata.net;dbname=hadja_cb', 'hadja', 'Hadja.2004');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $connect = new PDO('mysql:host=mysql-hadja.alwaysdata.net;dbname=hadja_cb', 'hadja', 'Hadja.2004');
+    $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
 
-$clientController = new ClientController($db);
+$clientController = new ClientController($connect);
 
 $clients = [];
 $transactions = [];
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($clients)) {
                 foreach ($clients as $client) {
                     echo "<div>";
-                    echo "<strong>" . htmlspecialchars($client['nom_client']) . ' ' . htmlspecialchars($client['prenom_client']) . "</strong><br>";
+                    echo "<strong>" . htmlspecialchars($client['Nom_client']) . ' ' . htmlspecialchars($client['Prenom_client']) . "</strong><br>";
                     echo "Téléphone: " . htmlspecialchars($client['telephone_client']) . "<br>";
                     echo "Email: " . htmlspecialchars($client['email_client']) . "<br>";
                     echo "Adresse: " . htmlspecialchars($client['adresse_client']) . "<br>";

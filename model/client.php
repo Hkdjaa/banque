@@ -76,32 +76,20 @@ class Client {
     // Getters and setters...
 
     public function getMatchingClients($search) {
-        $search = trim($search);
-        
-        // Adapter la requête pour récupérer toutes les informations du propriétaire du compte
-        $sql = "SELECT c.id, c.nom_client, c.prenom_client, c.telephone_client, c.email_client, 
-                c.adresse_client, c.sexe, c.statut, cb.numero_compte, cb.solde 
-                FROM comptebancaire cb 
-                JOIN clients c ON cb.client_id = c.id 
-                WHERE cb.numero_compte LIKE :search OR c.nom_client LIKE :search";
-        $stmt = $this->connect->prepare($sql);
-
-        
-        // Fetch results
+        $query = "SELECT client.*, comptebancaire.numero_compte, comptebancaire.solde 
+                  FROM client 
+                  LEFT JOIN comptebancaire ON client.ID_client = comptebancaire.client_id 
+                  WHERE client.Nom_client LIKE :search OR client.Prenom_client LIKE :search OR client.email_client LIKE :search";
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute(['search' => '%' . $search . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAccountTransactions($accountNumber) {
-        $accountNumber = trim($accountNumber);
-        
-        // Préparer la requête SQL
-        $sql = "SELECT * FROM transactions WHERE numero_compte = :accountNumber";
-        $stmt = $this->connect->prepare($sql);
-        
-        // Bind parameter and execute query
+        $query = "SELECT * FROM operationbancaire 
+                  WHERE compte_source_id = :accountNumber OR compte_destination_id = :accountNumber";
+        $stmt = $this->connect->prepare($query);
         $stmt->execute(['accountNumber' => $accountNumber]);
-        
-        // Fetch results
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
   

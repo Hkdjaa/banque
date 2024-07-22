@@ -38,7 +38,6 @@ class OperationBancaire {
                 return "Erreur lors du dépôt : " . $e->getMessage();
             }
         }
-    }
     
 
     // Method to withdraw money

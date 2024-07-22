@@ -13,11 +13,11 @@
                                     <form action="../controller/virement_controller.php" method="post">
                                         <div class="fields">
                                             <div class="field">
-                                                <label for="id1">Identifiant du client</label>
+                                                <label for="id1">Numéro compte du client</label>
                                                 <input type="text" name="id1" id="id1" placeholder="Numéro bancaire" required />
                                             </div>
                                             <div class="field">
-                                                <label for="id2">Identifiant du destinataire</label>
+                                                <label for="id2">Numéro compte du destinataire</label>
                                                 <input type="text" name="id2" id="id2" placeholder="Numéro bancaire" required />
                                             </div>
                                             <div class="field">
